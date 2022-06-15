@@ -1,0 +1,109 @@
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+//slower sort 
+//Insertion sort funciton in order to sort the numbers.
+void Sorting(int arr[], int n){
+    //setting variables
+    int x, i, y; 
+    /*
+    x = to set new array
+    i = iterate within the array 
+    y = holding a value within the array
+    */ 
+    for (x = 1; x < n; x++){  //iterating through array with for loop
+        i = arr[x];  //i is temporary variable to hold arr[x]
+        y = x - 1; //y holds the previous index of x;
+        //Moving the numbers
+        while (y >= 0 && arr[y] > i){ //if the previous value (arr[y]) of the current value (arr[x])/i is greater, then we want to swap the numbers until it reaches a number greater.
+            arr[y + 1] = arr[y]; //move values over so we can put the current value at the correct spot (adding from whereever in the array + 1, taking 2 spaces)
+            y = y - 1;  //moving the numbers backwards if arr[y] is smaller to the number its comparing
+        }
+        //then we add the current value at the correct spot of the array so it is greater than the prev cell but not the next cell (unless last) (moving it up)
+        arr[y + 1] = i; 
+    }  
+}
+//EX:
+/*
+ input: arr = [6,5,3,2,1,6,4], n = 7
+ first iteration:
+    x = 1
+    i = 5 (arr[x])
+    y = 0 , arr[y] = 6
+since arr[y] (6) > arr[x] (5) && y = 0:
+    arr[1] = arr[y] : [6,6,3,2,1,6,4]
+    y = y - 1 : y = -1
+since y < 0 : stop while loop
+    arr[y + 1] = 5 : arr[0] = 5 -> [5,6,3,2,1,6,4]
+second iteration:
+    x = 2
+    i = 3 (arr[x])
+    y = 1 , arr[y] = 6
+
+arr[1] (6) > arr[2] (3) && y = 1:
+    arr[2] = arr[1] : [5,6,6,2,1,6,4]
+    y = y - 1 : y = 0
+since y = 0 && arr[y] (5) > arr[x] (3): continue loop
+    arr[1] = arr[0] : [5,5,6,2,1,6,4]
+    y = y - 1 :  y = -1
+since y = -1 : stop loop
+    arr[0] = arr[x] : [3,5,6,2,1,6,4]
+ ...
+ explanation:
+    for all values greater than current value (arr[x]) then swap all greater values over to the right of array
+ iterating (y) to the left of array until arr[x] is greater than arr[y], then we put arr[x] at that spot.
+ */
+ 
+
+
+
+
+
+
+//An array function in order to print out the size of n
+void Array(int arr[], int n){  
+    int s; //variable
+    for (s = 0; s < n; s++){ //iterating a new array for the least to greatest array 
+       cout << arr[s] << ";"; //print value of array at index s (aka 0)
+    }
+cout<<"\n"; //new line space
+}
+
+  
+
+
+
+
+
+
+//The main driving code
+int main(){  
+    int n; //value to hold size of pointer array
+    cin>>n; //user input
+    int arr[n]; //initialize array of size n
+    for(int x=0; x<n; x++){
+    cin>>arr[x]; //user inputs values into array
+    }
+    for(int x=0; x<n; x++){
+        if(x>0){
+        Sorting(arr, x+1); //sort only values up till x + 1 so we can format output to be like example (shown below)
+        Array(arr, x+1); //display values in array which should only be from 0 to x + 1 to format output to be like example
+        }
+    }
+    return 0; //returning value 
+}  
+
+/*Ex:
+             6
+             1
+             5
+             4
+             2
+             7
+             8
+             1;5;
+             1;4;5;
+             1;2;4;5;
+             1;2;4;5;7;
+             1;2;4;5;7;8;
+             */
